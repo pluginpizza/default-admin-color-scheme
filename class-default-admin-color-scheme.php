@@ -70,6 +70,10 @@ class Default_Admin_Color_Scheme {
 		// Unfortunately, a default value is set on user creation, let's work around this
 		add_filter( 'update_user_metadata', array( $this, 'maybe_set_override' ), 10, 5 );
 
+		// Add an action link pointing to the general options page.
+		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'default-admin-color-scheme.php' );
+		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+
 		// All of the above, solely for this little pièce de résistance
 		add_filter( 'get_user_option_admin_color', array( $this, 'filter_get_user_option_admin_color' ) );
 	}
@@ -404,6 +408,20 @@ class Default_Admin_Color_Scheme {
 		if ( $meta_key == 'admin_color' ) {
 			update_user_meta( $object_id, 'plugin_default_admin_color_scheme_override', 1 );
 		}
+	}
+
+	/**
+	 * Add settings action link to the plugins page.
+	 *
+	 * @since  1.0.0
+	 */
+	public function add_action_links( $links ) {
+		return array_merge(
+			array(
+				'settings' => '<a href="' . admin_url( 'options-general.php?#users_can_change_color_scheme' ) . '">' . __( 'Settings', 'post-by-email' ) . '</a>'
+			),
+			$links
+		);
 	}
 
 	/**
