@@ -8,12 +8,12 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Select a default admin color scheme
+Select a default admin color scheme for new and existing users.
 
 == Description ==
 
 Adds a color picker to `Settings > General` to select a default color scheme for all users.
-Optionally disables the color scheme picker on the `Users > Personal Options` page.
+Optionally disables the color scheme picker on the `Users > Profile` page.
 
 ### Github ###
 
