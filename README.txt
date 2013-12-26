@@ -12,8 +12,8 @@ Select a default admin color scheme
 
 == Description ==
 
-Adds a color picker to `Settings > General` where you can select a default color scheme for all users.
-Optionally disables the color scheme picker on the user profile page.
+Adds a color picker to `Settings > General` to select a default color scheme for all users.
+Optionally disables the color scheme picker on the `Users > Personal Options` page.
 
 == Installation ==
 
