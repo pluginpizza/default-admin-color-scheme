@@ -15,6 +15,10 @@ Select a default admin color scheme
 Adds a color picker to `Settings > General` to select a default color scheme for all users.
 Optionally disables the color scheme picker on the `Users > Personal Options` page.
 
+### Github ###
+
+Fork me on [Github](https://github.com/barryceelen/wp-default-admin-color-scheme).
+
 == Installation ==
 
 = Using The WordPress Dashboard =
