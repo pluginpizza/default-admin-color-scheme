@@ -11,7 +11,7 @@
  * Plugin Name:       Default Admin Color Scheme
  * Plugin URI:        https://github.com/barryceelen/wp-default-admin-color-scheme
  * Description:       Select a default admin color scheme for all users.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Barry Ceelen
  * Author URI:        https://github.com/barryceelen
  * Text Domain:       default-admin-color-scheme
@@ -31,7 +31,9 @@ if ( is_admin() ) {
 	add_action( 'plugins_loaded', array( 'Default_Admin_Color_Scheme', 'get_instance' ) );
 }
 
-/*
- * When the plugin is deleted, the uninstall.php file is loaded.
+/**
+ * Save default settings.
+ *
+ * Note: When the plugin is deleted, the uninstall.php file is loaded.
  */
 register_activation_hook( __FILE__, array( 'Default_Admin_Color_Scheme', 'activate' ) );
