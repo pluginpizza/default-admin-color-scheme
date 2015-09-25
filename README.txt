@@ -45,6 +45,9 @@ Fork me on [Github](https://github.com/barryceelen/wp-default-admin-color-scheme
 
 == Changelog ==
 
+= 1.0.1 =
+* Fix loading translation files, add dutch and german translations
+
 = 1.0 =
 * Initial release
 
