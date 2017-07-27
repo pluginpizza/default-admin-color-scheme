@@ -5,7 +5,6 @@
 		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
 	</rule>
 	<rule ref="WordPress-Docs"/>
-	<!-- <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/> -->
 	<rule ref="Generic.Commenting.Todo"/>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
