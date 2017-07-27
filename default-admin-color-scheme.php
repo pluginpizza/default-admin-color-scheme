@@ -4,7 +4,7 @@
  *
  * @package   Default_Admin_Color_Scheme
  * @author    Barry Ceelen <b@rryceelen.com>
- * @license   GPL-2.0+
+ * @license   GPL-3.0+
  * @link      https://github.com/barryceelen/wp-default-admin-color-scheme
  * @copyright 2013 Barry Ceelen
  *
@@ -15,8 +15,8 @@
  * Author:            Barry Ceelen
  * Author URI:        https://github.com/barryceelen
  * Text Domain:       default-admin-color-scheme
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License:           GPL-3.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path:       /languages
  * GitHub Plugin URI: https://github.com/barryceelen/wp-default-admin-color-scheme
  */
