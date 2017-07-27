@@ -291,10 +291,8 @@ class Default_Admin_Color_Scheme {
 	 */
 	public function settings_checkbox() {
 		$option = get_option( 'plugin_default_admin_color_scheme' );
-		$html = '<fieldset><legend class="screen-reader-text"><span>' . __( 'User Color Scheme', 'default-admin-color-scheme' ) . '</span></legend><label>
-	<input name="plugin_default_admin_color_scheme[users_can_change_color_scheme]" type="checkbox" id="users_can_change_color_scheme" value="1" ' . checked( 1, $option['users_can_change_color_scheme'], false ) . '>' . __( 'Users can select their own color scheme', 'default-admin-color-scheme' ) . '</label>
-	</fieldset>';
-		echo $html;
+
+		include( 'templates/settings-checkbox.php' );
 	}
 
 	/**
