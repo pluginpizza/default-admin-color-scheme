@@ -20,18 +20,18 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 *
-	 * @var     string
+	 * @var string
 	 */
 	const VERSION = '1.0.0';
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 *
-	 * @var      object
+	 * @var object
 	 */
 	protected static $instance = null;
 
@@ -39,57 +39,57 @@ class Default_Admin_Color_Scheme {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     1.0.0
+	 * @since 1.0.0
 	 */
 	private function __construct() {
 
-		// Load plugin text domain
+		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-		// Activate plugin when new blog is added
+		// Activate plugin when new blog is added.
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
-		// Register settings
+		// Register settings.
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 
-		// Save default color scheme in a hacky way
-		add_filter( 'pre_update_option_plugin_default_admin_color_scheme', array( $this, 'save_color_scheme' ), 0, 2 );
+		// Save default color scheme in a hacky way.
+		add_filter( 'pre_update_option_plugin_default_admin_color_scheme', array( $this, 'save_color_scheme' ), 0 );
 
-		// Save color scheme via ajax
+		// Save color scheme via ajax.
 		add_action( 'wp_ajax_save-default-color-scheme', array( $this, 'ajax_save_color_scheme' ), 1 );
 
-		// Load JavaScript
+		// Load JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-		// Maybe remove color picker from user profile
+		// Maybe remove color picker from user profile.
 		add_action( 'admin_head-profile.php', array( $this, 'maybe_remove_profile_color_picker' ) );
 
-		// Filter 'get_user_option_admin_color' to preselect the default scheme on the "General Settings" page
+		// Filter 'get_user_option_admin_color' to preselect the default scheme on the "General Settings" page.
 		add_action( 'admin_head-options-general.php', array( $this, 'filter_get_user_option_admin_color_on_options_general' ) );
 
-		// Unfortunately, a default value is set on user creation, let's work around this
-		add_filter( 'update_user_metadata', array( $this, 'maybe_set_override' ), 10, 5 );
+		// Unfortunately, a default value is set on user creation, let's work around this.
+		add_filter( 'update_user_metadata', array( $this, 'maybe_set_override' ), 10, 3 );
 
 		// Add an action link pointing to the general options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . 'default-admin-color-scheme.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
-		// All of the above, solely for this little pièce de résistance
+		// All of the above, solely for this little pièce de résistance.
 		add_filter( 'get_user_option_admin_color', array( $this, 'filter_get_user_option_admin_color' ) );
 	}
 
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
+	 * @since 1.0.0
 	 *
-	 * @return    object    A single instance of this class.
+	 * @return object A single instance of this class.
 	 */
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
-			self::$instance = new self;
+		if ( null === self::$instance ) {
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -98,20 +98,20 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses
-	 *                                       "Network Activate" action, false if
-	 *                                       WPMU is disabled or plugin is
-	 *                                       activated on an individual blog.
+	 * @param bool $network_wide True if WPMU superadmin uses
+	 *                           "Network Activate" action, false if
+	 *                           WPMU is disabled or plugin is
+	 *                           activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
 
 		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
-			if ( $network_wide  ) {
+			if ( $network_wide ) {
 
-				// Get all blog ids
+				// Get all blog ids.
 				$blog_ids = self::get_blog_ids();
 
 				foreach ( $blog_ids as $blog_id ) {
@@ -125,7 +125,6 @@ class Default_Admin_Color_Scheme {
 			} else {
 				self::single_activate();
 			}
-
 		} else {
 			self::single_activate();
 		}
@@ -135,12 +134,12 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses
-	 *                                       "Network Deactivate" action, false if
-	 *                                       WPMU is disabled or plugin is
-	 *                                       deactivated on an individual blog.
+	 * @param boolean $network_wide True if WPMU superadmin uses
+	 *                              "Network Deactivate" action, false if
+	 *                              WPMU is disabled or plugin is
+	 *                              deactivated on an individual blog.
 	 */
 	public static function deactivate( $network_wide ) {
 
@@ -148,7 +147,7 @@ class Default_Admin_Color_Scheme {
 
 			if ( $network_wide ) {
 
-				// Get all blog ids
+				// Get all blog ids.
 				$blog_ids = self::get_blog_ids();
 
 				foreach ( $blog_ids as $blog_id ) {
@@ -163,7 +162,6 @@ class Default_Admin_Color_Scheme {
 			} else {
 				self::single_deactivate();
 			}
-
 		} else {
 			self::single_deactivate();
 		}
@@ -173,9 +171,9 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Fired when a new site is activated with a WPMU environment.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param    int    $blog_id    ID of the new blog.
+	 * @param int $blog_id ID of the new blog.
 	 */
 	public function activate_new_site( $blog_id ) {
 
@@ -195,34 +193,32 @@ class Default_Admin_Color_Scheme {
 	 * - not spam
 	 * - not deleted
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 *
-	 * @return   array|false    The blog ids, false if no matches.
+	 * @return array|false The blog ids, false if no matches.
 	 */
 	private static function get_blog_ids() {
 
 		global $wpdb;
 
-		// get an array of blog ids
-		$sql = "SELECT blog_id FROM $wpdb->blogs
-			WHERE archived = '0' AND spam = '0'
-			AND deleted = '0'";
+		// get an array of blog ids.
+		$sql = "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'";
 
-		return $wpdb->get_col( $sql );
+		return $wpdb->get_col( $sql ); // WPCS: db call ok. unprepared SQL ok.
 
 	}
 
 	/**
 	 * Fired for each blog when the plugin is activated.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	private static function single_activate() {
 		add_option(
 			'plugin_default_admin_color_scheme',
 			array(
 				'users_can_change_color_scheme' => 1,
-				'color_scheme' => 'fresh'
+				'color_scheme' => 'fresh',
 			)
 		);
 	}
@@ -239,7 +235,7 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Add a settings section to the 'General Settings' page.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public function register_settings() {
 
@@ -266,7 +262,7 @@ class Default_Admin_Color_Scheme {
 		add_settings_field(
 			'color-picker',
 			__( 'Default Color Scheme', 'default-admin-color-scheme' ),
-			'admin_color_scheme_picker', // Uses the default color scheme picker
+			'admin_color_scheme_picker', // Uses the default color scheme picker.
 			'general',
 			$option_name
 		);
@@ -275,7 +271,9 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Validate settings.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param array $input Plugin setting to validate.
 	 */
 	public function settings_validate( $input ) {
 		$input['users_can_change_color_scheme'] = absint( $input['users_can_change_color_scheme'] );
@@ -285,11 +283,10 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Display a checkbox for the 'users_can_change_color_scheme' option.
 	 *
-	 * @since    1.0.0
-	 *
-	 * @return string
+	 * @since 1.0.0
 	 */
 	public function settings_checkbox() {
+
 		$option = get_option( 'plugin_default_admin_color_scheme' );
 
 		include( 'templates/settings-checkbox.php' );
@@ -299,34 +296,49 @@ class Default_Admin_Color_Scheme {
 	 * Save color scheme.
 	 *
 	 * To select the default scheme the color scheme picker of the user profile page is used.
-	 * As I have yet to figure out how to save the value of this picker via the settings API,
-	 * the value gets added via a filter whenever the 'plugin_default_admin_color_scheme' option is updated.
+	 * Its value is not picked up by our settings_validate() method as the field values are not namespaced.
+	 * To work around that limitation, this function is hooked into saving the 'plugin_default_admin_color_scheme' option.
 	 *
 	 * Suggestions for improvement welcome!
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param string $value Color scheme setting, eg. 'fresh'.
 	 */
-	public function save_color_scheme( $value, $old_value ) {
-		// Do not filter $value when doing ajax
+	public function save_color_scheme( $value ) {
+
+		// Do not filter $value when doing ajax.
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return $value;
 		}
-		// Add or update color scheme
-		$value['color_scheme'] = isset( $_POST['admin_color'] ) ? sanitize_key( $_POST['admin_color'] ) : 'fresh';
+
+		if (
+			! empty( $_POST['color-nonce'] ) // WPCS: input var okay.
+			&&
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['color-nonce'] ) ), 'save-color-scheme' ) // WPCS: input var okay.
+		) {
+			$value['color_scheme'] = isset( $_POST['admin_color'] ) ? sanitize_key( $_POST['admin_color'] ) : 'fresh'; // WPCS: input var okay.
+		}
+
 		return $value;
 	}
 
 	/**
 	 * Auto-save the selected color scheme.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public function ajax_save_color_scheme() {
+
 		global $_wp_admin_css_colors;
 
 		check_ajax_referer( 'save-color-scheme', 'nonce' );
 
-		$color_scheme = sanitize_key( $_POST['color_scheme'] );
+		if ( empty( $_POST['color_scheme'] ) ) { // WPCS: input var okay.
+			wp_send_json_error();
+		}
+
+		$color_scheme = sanitize_key( $_POST['color_scheme'] ); // WPCS: input var okay.
 
 		if ( ! isset( $_wp_admin_css_colors[ $color_scheme ] ) ) {
 			wp_send_json_error();
@@ -341,13 +353,16 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Register and enqueue JavaScript files.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
+
 		$screen = get_current_screen();
-		if ( $screen->id != 'options-general' ) {
+
+		if ( 'options-general' !== $screen->id ) {
 			return;
 		}
+
 		wp_enqueue_script(
 			'default-admin-color-scheme',
 			plugins_url( 'js/admin.js', __FILE__ ),
@@ -360,11 +375,11 @@ class Default_Admin_Color_Scheme {
 	/**
 	 * Remove color picker from profile edit screen if users are not allowed to choose their own admin color scheme,
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public function maybe_remove_profile_color_picker() {
 		$option = get_option( 'plugin_default_admin_color_scheme' );
-		if ( 1 != $option['users_can_change_color_scheme'] ) {
+		if ( 1 !== $option['users_can_change_color_scheme'] ) {
 			remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
 		}
 	}
@@ -397,10 +412,14 @@ class Default_Admin_Color_Scheme {
 	 * Set flag if the user selects a color scheme.
 	 *
 	 * @since  1.0.0
+	 *
+	 * @param null|bool $check      Whether to allow updating metadata for the given type.
+	 * @param int       $object_id  Object ID.
+	 * @param string    $meta_key   Meta key.
 	 */
-	public function maybe_set_override( $null, $object_id, $meta_key, $meta_value, $prev_value ) {
-		if ( $meta_key == 'admin_color' ) {
-			update_user_meta( $object_id, 'plugin_default_admin_color_scheme_override', 1 );
+	public function maybe_set_override( $check, $object_id, $meta_key ) {
+		if ( 'admin_color' === $meta_key ) {
+			update_user_option( $object_id, 'plugin_default_admin_color_scheme_override', 1 );
 		}
 	}
 
@@ -408,30 +427,33 @@ class Default_Admin_Color_Scheme {
 	 * Add settings action link to the plugins page.
 	 *
 	 * @since  1.0.0
+	 *
+	 * @param array $actions An array of plugin action links.
 	 */
-	public function add_action_links( $links ) {
+	public function add_action_links( $actions ) {
 		return array_merge(
 			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?#users_can_change_color_scheme' ) . '">' . __( 'Settings', 'post-by-email' ) . '</a>'
+				'settings' => '<a href="' . admin_url( 'options-general.php?#users_can_change_color_scheme' ) . '">' . __( 'Settings', 'default-admin-color-scheme' ) . '</a>',
 			),
-			$links
+			$actions
 		);
 	}
 
 	/**
 	 * Filter 'get_user_option_admin_color' to return the desired color scheme.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param  string $color_scheme
+	 * @param  string $color_scheme User color scheme option.
 	 * @return string
 	 */
 	public function filter_get_user_option_admin_color( $color_scheme ) {
+
 		$option = get_option( 'plugin_default_admin_color_scheme' );
 		$default_color_scheme = isset( $option['color_scheme'] ) ? $option['color_scheme'] : $color_scheme;
 
-		if ( isset( $option['users_can_change_color_scheme'] ) && $option['users_can_change_color_scheme'] == 1 ) {
-			if ( 1 == get_user_meta( get_current_user_id(), 'plugin_default_admin_color_scheme_override', true ) ) {
+		if ( isset( $option['users_can_change_color_scheme'] ) && 1 === (int) $option['users_can_change_color_scheme'] ) {
+			if ( 1 === (int) get_user_option( 'plugin_default_admin_color_scheme_override' ) ) {
 				return $color_scheme;
 			} else {
 				return $default_color_scheme;

@@ -1,5 +1,6 @@
 <?php
 /**
+ * Main plugin file.
  *
  * @package   Default_Admin_Color_Scheme
  * @author    Barry Ceelen <b@rryceelen.com>
@@ -7,7 +8,6 @@
  * @link      https://github.com/barryceelen/wp-default-admin-color-scheme
  * @copyright 2013 Barry Ceelen
  *
- * @wordpress-plugin
  * Plugin Name:       Default Admin Color Scheme
  * Plugin URI:        https://github.com/barryceelen/wp-default-admin-color-scheme
  * Description:       Select a default admin color scheme for all users.
