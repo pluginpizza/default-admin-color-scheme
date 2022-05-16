@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name.
+ * Contains the main plugin class.
  *
  * @package   Default_Admin_Color_Scheme
  * @author    Barry Ceelen <b@rryceelen.com>
@@ -116,6 +116,7 @@ class Default_Admin_Color_Scheme {
 
 				foreach ( $blog_ids as $blog_id ) {
 
+					// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 					switch_to_blog( $blog_id );
 					self::single_activate();
 				}
@@ -152,6 +153,7 @@ class Default_Admin_Color_Scheme {
 
 				foreach ( $blog_ids as $blog_id ) {
 
+					// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 					switch_to_blog( $blog_id );
 					self::single_deactivate();
 
@@ -181,6 +183,7 @@ class Default_Admin_Color_Scheme {
 			return;
 		}
 
+		// phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.switch_to_blog_switch_to_blog
 		switch_to_blog( $blog_id );
 		self::single_activate();
 		restore_current_blog();
@@ -204,8 +207,13 @@ class Default_Admin_Color_Scheme {
 		// get an array of blog ids.
 		$sql = "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'";
 
-		return $wpdb->get_col( $sql ); // WPCS: db call ok. unprepared SQL ok.
-
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		return $wpdb->get_col( $sql );
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:enable WordPress.DB.PreparedSQL.NotPrepared
 	}
 
 	/**
@@ -218,7 +226,7 @@ class Default_Admin_Color_Scheme {
 			'plugin_default_admin_color_scheme',
 			array(
 				'users_can_change_color_scheme' => 1,
-				'color_scheme' => 'fresh',
+				'color_scheme'                  => 'fresh',
 			)
 		);
 	}
@@ -287,9 +295,10 @@ class Default_Admin_Color_Scheme {
 	 */
 	public function settings_checkbox() {
 
+		// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		$option = get_option( 'plugin_default_admin_color_scheme' );
 
-		include( 'templates/settings-checkbox.php' );
+		include plugin_dir_path( __FILE__ ) . 'templates/settings-checkbox.php';
 	}
 
 	/**
@@ -344,7 +353,7 @@ class Default_Admin_Color_Scheme {
 			wp_send_json_error();
 		}
 
-		$option = get_option( 'plugin_default_admin_color_scheme' );
+		$option                 = get_option( 'plugin_default_admin_color_scheme' );
 		$option['color_scheme'] = $color_scheme;
 		update_option( 'plugin_default_admin_color_scheme', $option );
 		wp_send_json_success();
@@ -403,7 +412,7 @@ class Default_Admin_Color_Scheme {
 	 * @return string
 	 */
 	public function get_default_admin_color_scheme() {
-		$option = get_option( 'plugin_default_admin_color_scheme' );
+		$option       = get_option( 'plugin_default_admin_color_scheme' );
 		$color_scheme = isset( $option['color_scheme'] ) ? $option['color_scheme'] : 'fresh';
 		return $color_scheme;
 	}
@@ -414,13 +423,16 @@ class Default_Admin_Color_Scheme {
 	 * @since  1.0.0
 	 *
 	 * @param null|bool $check      Whether to allow updating metadata for the given type.
-	 * @param int       $object_id  Object ID.
+	 * @param int       $object_id  User ID.
 	 * @param string    $meta_key   Meta key.
 	 */
 	public function maybe_set_override( $check, $object_id, $meta_key ) {
+
 		if ( 'admin_color' === $meta_key ) {
 			update_user_option( $object_id, 'plugin_default_admin_color_scheme_override', 1 );
 		}
+
+		return $check;
 	}
 
 	/**
@@ -449,7 +461,7 @@ class Default_Admin_Color_Scheme {
 	 */
 	public function filter_get_user_option_admin_color( $color_scheme ) {
 
-		$option = get_option( 'plugin_default_admin_color_scheme' );
+		$option               = get_option( 'plugin_default_admin_color_scheme' );
 		$default_color_scheme = isset( $option['color_scheme'] ) ? $option['color_scheme'] : $color_scheme;
 
 		if ( isset( $option['users_can_change_color_scheme'] ) && 1 === (int) $option['users_can_change_color_scheme'] ) {
