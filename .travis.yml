@@ -3,7 +3,7 @@ language: php
 matrix:
   include:
     # Arbitrary PHP version to run the sniffs against.
-    - php: '7.0'
+    - php: '7.3'
       env: SNIFF=1
 
 before_install:
