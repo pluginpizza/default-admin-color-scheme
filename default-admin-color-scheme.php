@@ -11,7 +11,7 @@
  * Plugin Name:       Default Admin Color Scheme
  * Plugin URI:        https://github.com/barryceelen/wp-default-admin-color-scheme
  * Text Domain:       default-admin-color-scheme
- * Version:           1.0.2
+ * Version:           1.0.3
  * Requires PHP:      5.3.0
  * Requires at least: 3.8.0
  * GitHub Plugin URI: https://github.com/barryceelen/wp-default-admin-color-scheme
