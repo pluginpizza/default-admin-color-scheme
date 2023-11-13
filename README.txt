@@ -2,7 +2,7 @@
 Contributors: functionsfile, barryceelen
 Tags: admin, branding, color scheme, custom dashboard, dashboard, staging
 Requires at least: 3.8
-Tested up to: 6.0
+Tested up to: 6.4
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv3+
