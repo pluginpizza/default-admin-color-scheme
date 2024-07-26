@@ -4,7 +4,7 @@ Tags: admin, branding, color scheme, custom dashboard, dashboard, staging
 Requires at least: 3.8
 Tested up to: 6.6
 Requires PHP: 5.3
-Stable tag: trunk
+Stable tag: 1.0.3
 License: GPLv3+
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
