@@ -1,8 +1,6 @@
 Default Admin Color Scheme
 ==========================
 
-[![Build Status](https://travis-ci.org/barryceelen/wp-default-admin-color-scheme.svg?branch=master)](https://travis-ci.org/barryceelen/wp-default-admin-color-scheme)
-
 Select a default admin color scheme for new and existing users. Optionally disable the color scheme picker to force a color scheme for all users.
 
 By default, WordPress uses the ‘Default’ color scheme unless a user has selected another color scheme on their profile settings page.

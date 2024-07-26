@@ -2,7 +2,7 @@
  * Used on the general settings page to make the color scheme picker work.
  *
  * @since 1.0.0
- * @package Default_Admin_Color_Scheme
+ * @package PluginPizza\DefaultAdminColorScheme
  */
 
  /* global ajaxurl */

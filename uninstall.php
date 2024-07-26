@@ -2,11 +2,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @package   Default_Admin_Color_Scheme
- * @author    Barry Ceelen <b@rryceelen.com>
- * @license   GPL-3.0+
- * @link      https://github.com/barryceelen/wp-default-admin-color-scheme
- * @copyright 2013 Barry Ceelen
+ * @package PluginPizza\DefaultAdminColorScheme
  */
 
 // If uninstall not called from WordPress, then exit.

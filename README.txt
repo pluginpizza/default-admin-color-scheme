@@ -1,8 +1,8 @@
 === Default Admin Color Scheme ===
-Contributors: functionsfile, barryceelen
+Contributors: pluginpizza, barryceelen, functionsfile
 Tags: admin, branding, color scheme, custom dashboard, dashboard, staging
 Requires at least: 3.8
-Tested up to: 6.4
+Tested up to: 6.6
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv3+
@@ -22,9 +22,9 @@ Default Admin Color Scheme adds a color scheme picker to the ‘General’ setti
 
 An additional option allows you to remove the admin color scheme picker from each user's ‘Profile’ settings page. Using this option results in all users seeing the same color scheme in the WordPress admin.
 
-### Github
+### Bug Reports
 
-Leave us a note or fork this plugin on [Github](https://github.com/barryceelen/wp-default-admin-color-scheme/issues).
+Do you want to report a bug or suggest a feature for Default Admin Color Scheme? Best to do so in the Default Admin Color Scheme [repository on GitHub](https://github.com/pluginpizza/default-admin-color-scheme/).
 
 == Installation ==
 
