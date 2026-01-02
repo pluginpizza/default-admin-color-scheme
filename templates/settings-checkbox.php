@@ -5,6 +5,7 @@
  * @package PluginPizza\DefaultAdminColorScheme
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <fieldset>
 	<legend class="screen-reader-text">

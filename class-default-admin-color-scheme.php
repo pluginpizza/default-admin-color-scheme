@@ -5,6 +5,8 @@
  * @package PluginPizza\DefaultAdminColorScheme
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Plugin class.
  */
