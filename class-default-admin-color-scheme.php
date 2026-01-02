@@ -3,6 +3,8 @@
  * Contains the main plugin class.
  *
  * @package PluginPizza\DefaultAdminColorScheme
+ *
+ * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
