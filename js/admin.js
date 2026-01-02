@@ -1,11 +1,4 @@
-/**
- * Used on the general settings page to make the color scheme picker work.
- *
- * @since 1.0.0
- * @package PluginPizza\DefaultAdminColorScheme
- */
-
- /* global ajaxurl */
+/* global ajaxurl */
 
 ( function( $ ){
 	'use strict';
