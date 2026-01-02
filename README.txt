@@ -1,6 +1,6 @@
 === Default Admin Color Scheme ===
 Contributors: pluginpizza, barryceelen, functionsfile
-Tags: admin, branding, color scheme, custom dashboard, dashboard, staging
+Tags: admin, branding, color scheme, custom dashboard, dashboard
 Requires at least: 3.8
 Tested up to: 6.9
 Requires PHP: 5.3
