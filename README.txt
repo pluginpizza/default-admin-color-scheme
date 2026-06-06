@@ -2,7 +2,7 @@
 Contributors: pluginpizza, barryceelen, functionsfile
 Tags: admin, branding, color scheme, custom dashboard, dashboard
 Requires at least: 3.8
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 5.3
 Stable tag: 1.0.3
 License: GPLv3+
