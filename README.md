@@ -21,5 +21,7 @@ Default Admin Color Scheme is hosted on the [WordPress plugin directory](https:/
 
 ### Composer
 
-Default Admin Color Scheme can be added as a dependency to your project via the [wpackagist composer repository](https://wpackagist.org/search?q=default-admin-color-scheme).
+Default Admin Color Scheme can be added as a dependency to your project via the [wp packages composer repository](https://wp-packages.org/packages/wp-plugin/default-admin-color-scheme).
+
+`composer require wp-plugin/default-admin-color-scheme`
 
